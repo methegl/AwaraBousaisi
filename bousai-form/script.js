@@ -1,4 +1,4 @@
-const GAS_URL = "https://script.google.com/macros/s/AKfycbxWm99WVNSCXlrk6dQhGWR8pxXLin1pP_rJusBW53AqEAtK0Gg1Mge4hTt6gR3ze6HVWg/exec";
+const GAS_URL = "https://script.google.com/macros/s/AKfycbznzDDpmju3ZEGv0PzpQWeGY7Rnpxsc4cbUu0eohkD4gkGXVlw02hpHdoFpkRk7KxeLhg/exec";
 
 const form = document.getElementById("entryForm");
 const participantsSelect = document.getElementById("participants");

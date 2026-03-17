@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>あわら市防災士の会・防災教室① 申し込みフォーム</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="container">
+    <section class="card">
+      <h1>あわら市防災士の会・防災教室①</h1>
+      <p class="lead">
+        ハザードマップの見方・自分のマイタイムライン・伝言ダイヤル171の使い方
+      </p>
+
+      <div class="info-grid">
+        <div>
+          <h2>開催日時</h2>
+          <p>2026年5月31日（日）9:00〜12:00</p>
+        </div>
+        <div>
+          <h2>会場</h2>
+          <p>あわら市中央公民館 第1会議室</p>
+        </div>
+        <div>
+          <h2>申込締切</h2>
+          <p>2026年5月23日 19:00まで</p>
+        </div>
+        <div>
+          <h2>定員</h2>
+          <p>20名</p>
+        </div>
+      </div>
+
+      <div class="status-box">
+        <p id="seatStatus">残席を確認中...</p>
+        <p id="closeStatus" class="close-text hidden">申し込み受付は終了しました。</p>
+      </div>
+    </section>
+
+    <section class="card" id="formSection">
+      <h2>お申し込み</h2>
+      <form id="entryForm">
+        <div class="form-group">
+          <label for="representativeName">代表者氏名 <span class="required">必須</span></label>
+          <input type="text" id="representativeName" name="representativeName" required />
+        </div>
+
+        <div class="form-group">
+          <label for="phone">電話番号 <span class="required">必須</span></label>
+          <input type="tel" id="phone" name="phone" required />
+        </div>
+
+        <div class="form-group">
+          <label for="email">メールアドレス <span class="required">必須</span></label>
+          <input type="email" id="email" name="email" required />
+        </div>
+
+        <div class="form-group">
+          <label for="address">住所 <span class="optional">任意</span></label>
+          <input type="text" id="address" name="address" />
+        </div>
+
+        <div class="form-group">
+          <label for="participants">参加人数 <span class="required">必須</span></label>
+          <select id="participants" name="participants" required>
+            <option value="1">1名</option>
+            <option value="2">2名</option>
+            <option value="3">3名</option>
+            <option value="4">4名</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="participant1">参加者1氏名 <span class="required">必須</span></label>
+          <input type="text" id="participant1" name="participant1" required />
+        </div>
+
+        <div class="form-group participant-field hidden" data-index="2">
+          <label for="participant2">参加者2氏名</label>
+          <input type="text" id="participant2" name="participant2" />
+        </div>
+
+        <div class="form-group participant-field hidden" data-index="3">
+          <label for="participant3">参加者3氏名</label>
+          <input type="text" id="participant3" name="participant3" />
+        </div>
+
+        <div class="form-group participant-field hidden" data-index="4">
+          <label for="participant4">参加者4氏名</label>
+          <input type="text" id="participant4" name="participant4" />
+        </div>
+
+        <button type="submit" id="submitBtn">申し込む</button>
+      </form>
+
+      <p id="message" class="message"></p>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

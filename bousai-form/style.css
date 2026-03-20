@@ -15,6 +15,52 @@ body {
   padding: 24px 16px 48px;
 }
 
+.intro-body {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.intro-text {
+  flex: 1;
+}
+
+.intro-text strong {
+  white-space: nowrap;
+}
+
+.intro-image {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+}
+
+.image-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 40%;   /* ←透かす範囲 */
+  height: 100%;
+  background: linear-gradient(to right, rgba(255,255,255,0.7), rgba(255,255,255,0));
+  pointer-events: none;
+  border-radius: 12px 0 0 12px;
+}
+
+.intro-image img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  object-position: center 40%;
+  border-radius: 12px;
+}
+
+@media (max-width: 768px) {
+  .intro-body {
+    flex-direction: column;
+  }
+}
+
+
 .intro-card {
   background: #fbfaf5;
   border-radius: 16px;

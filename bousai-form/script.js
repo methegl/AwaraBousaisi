@@ -36,8 +36,6 @@ function updateParticipantFields() {
 participantsSelect.addEventListener("change", updateParticipantFields);
 updateParticipantFields();
 
-const formData = getFormData();
-
       function getFormData() {
         return {
           representativeName: document.getElementById("representativeName").value.trim(),
@@ -85,10 +83,12 @@ async function loadStatus() {
         if (data.full) {
          seatStatus.innerHTML = "現在、定員に達したため受付を終了しております。<br>またのご参加をお待ちしております。";
          statusBox.className = "status-box status-normal";
+         formSection.classList.add("hidden");
       } else {
         // 👇 締切の場合
         seatStatus.textContent = "申し込み受付は終了しました。";
         statusBox.className = "status-box status-error";
+        formSection.classList.add("hidden");
       }
 
       seatStatus.classList.remove("hidden");
@@ -115,10 +115,38 @@ async function loadStatus() {
   }
 }
 
+loadStatus();
+
+    confirmBtn.addEventListener("click", () => {
+      if (!form.reportValidity()) {
+        return;
+      }
+      
+      const formData = getFormData();
+      renderConfirmContent(formData);
+
+      message.className = "message hidden";
+      message.textContent = "";
+
+      formSection.classList.add("hidden");
+      confirmSection.classList.remove("hidden");
+
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    backBtn.addEventListener("click", () => {
+      confirmSection.classList.add("hidden");
+      formSection.classList.remove("hidden");
+
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
 submitFinalBtn.addEventListener("click", async () => {
   message.textContent = "";
   submitFinalBtn.disabled = true;
   submitFinalBtn.innerHTML = "送信中… ⏳";
+
+  const formData = getFormData();
 
   try {
     const res = await fetch(GAS_URL, {
@@ -134,45 +162,23 @@ submitFinalBtn.addEventListener("click", async () => {
     if (data.success) {
       message.innerHTML = "申し込みが完了しました。<br>確認メールを送信しました。";
       message.className = "status-box status-success";
-      formSection.classList.add("hidden");
-      updateParticipantFields();
-
-      
-
-      
-
-      loadStatus();
-
-    confirmBtn.addEventListener("click", () => {
-      if (!form.reportValidity()) {
-        return;
-      }
-      
-
-      formSection.classList.add("hidden");
-      confirmSection.classList.remove("hidden");
-
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    });
-
-    backBtn.addEventListener("click", () => {
       confirmSection.classList.add("hidden");
-      formSection.classList.remove("hidden");
-
+      form.reset();
+      updateParticipantFields();
+      await loadStatus();
+      formSection.classList.add("hidden");
       window.scrollTo({ top: 0, behavior: "smooth" });
-    });
-
     } else {
       message.textContent = data.message || "申し込みに失敗しました。";
       message.className = "status-box status-error";
+      window.scrollTo({ top: 0, behavior: "smooth" });
     }
   } catch (error) {
     message.textContent = "⚠️送信エラーが発生しました。時間をおいて再度お試しください。";
     message.className = "status-box status-error";
+    window.scrollTo({ top: 0, behavior: "smooth" });
   } finally {
     submitFinalBtn.disabled = false;
     submitFinalBtn.textContent = "この内容で申し込む";
   }
 });
-
-loadStatus();
